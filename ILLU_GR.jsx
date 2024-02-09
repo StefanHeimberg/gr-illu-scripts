@@ -129,8 +129,8 @@ if (app.documents.length > 0) {
         }
 
         var pages = idoc.artboards.length;
-        var datee = getdate();
-        var timee = gettime();
+        var datee = getCurrentDateFormatted();
+        var timee = getCurrentTimeFormatted();
         var fname = idoc.path == '' ? "Full Name: <unsaved document>" : idoc.fullName;
         var file = idoc.name;
 
@@ -187,36 +187,24 @@ if (app.documents.length > 0) {
     alert("There's no open document.");
 }
 
-function getdate() {
-    var date = new Date();
-    var day = date.getDate();
-    var month = date.getMonth() + 1; // Month is zero-based
-    var year = date.getFullYear();
-
-    // Add leading zeros if necessary
-    if (day < 10) {
-        day = '0' + day;
-    }
-    if (month < 10) {
-        month = '0' + month;
-    }
-
-    return day + '.' + month + '.' + year;
+/**
+ * Liefert das aktuelle Datum formatiert zurück
+ * @return {String}      Aktuelles Datum im Format DD.MM.YYYY
+ */
+function getCurrentDateFormatted() { 
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString?retiredLocale=de
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#datestyle
+    var options = { dateStyle: 'long'};
+    return new Date().toLocaleDateString('de-CH', options);
 }
 
-function gettime() {
-    var time = new Date();
-    var hours = time.getHours();
-    var minutes = time.getMinutes();
-    if (minutes < 10) {
-        minutes = "0" + minutes
-    }
-
-    if (hours > 11) {
-        ampm = "PM";
-    } else {
-        ampm = "AM";
-    }
-    var curtime = hours + ":" + minutes + " " + ampm;
-    return curtime;
+/**
+ * Liefert die aktuelle Zeit formatiert zurück
+ * @return {String}      Aktuelles Uhrzeit im 12H Format HH:MM AM/PM
+ */
+function getCurrentTimeFormatted() {
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString?retiredLocale=de
+    // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timestyle
+    var options = { timeStyle: 'long', hour12: true };
+    return new Date().toLocaleTimeString('de-CH', options);
 }
