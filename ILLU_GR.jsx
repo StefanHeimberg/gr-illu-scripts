@@ -194,7 +194,7 @@ if (app.documents.length > 0) {
 function getCurrentDateFormatted() { 
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString?retiredLocale=de
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#datestyle
-    let options = { dateStyle: 'long'};
+    var options = { dateStyle: 'long'};
     return new Date().toLocaleDateString('de-CH', options);
 }
 
@@ -205,6 +205,6 @@ function getCurrentDateFormatted() {
 function getCurrentTimeFormatted() {
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleTimeString?retiredLocale=de
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat/DateTimeFormat#timestyle
-    let options = { timeStyle: 'long', hour12: true };
+    var options = { timeStyle: 'long', hour12: true };
     return new Date().toLocaleTimeString('de-CH', options);
 }
